@@ -962,71 +962,71 @@ export default function Shell({ children }) {
             </div>
 
             {/* Separated User Role Cards */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               {/* Board / Director */}
               <button
                 onClick={() => setRole('director')}
                 title="Switch to Board of Directors View"
-                className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-xl border transition-all duration-200 ${
+                className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-xl border transition-all duration-200 cursor-pointer ${
                   role === 'director'
-                    ? 'bg-brand-600 border-brand-500 shadow-md shadow-brand-900/30 text-white'
-                    : 'bg-white border-slate-200 text-slate-600 hover:border-brand-400 hover:shadow-sm hover:text-slate-900'
+                    ? 'bg-brand-600 border-brand-500 shadow-md shadow-brand-900/30 text-white ring-1 ring-brand-400/40'
+                    : 'bg-white border-slate-200 text-slate-700 hover:border-brand-400 hover:shadow-xs hover:bg-slate-50/80'
                 }`}
               >
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-extrabold shrink-0 ${
-                  role === 'director' ? 'bg-gold-400 text-slate-900' : 'bg-slate-100 text-slate-700 group-hover:bg-brand-50'
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-roboto font-extrabold shrink-0 shadow-2xs ${
+                  role === 'director' ? 'bg-gold-400 text-slate-950' : 'bg-slate-100 text-slate-700 group-hover:bg-brand-50 group-hover:text-brand-700'
                 }`}>
                   BD
                 </div>
                 <div className="hidden lg:flex flex-col items-start leading-none">
-                  <span className="text-[11px] font-extrabold tracking-tight">Board</span>
-                  <span className={`text-[9px] font-mono mt-0.5 ${role === 'director' ? 'text-gold-300' : 'text-slate-400'}`}>Director</span>
+                  <span className="text-[11px] font-inter font-extrabold tracking-tight">Board</span>
+                  <span className={`text-[10px] font-roboto font-medium mt-0.5 ${role === 'director' ? 'text-gold-300' : 'text-slate-500'}`}>Director</span>
                 </div>
-                <Crown className={`w-3.5 h-3.5 hidden lg:block ${role === 'director' ? 'text-gold-300' : 'text-slate-300 group-hover:text-brand-400'}`} />
+                <Crown className={`w-3.5 h-3.5 hidden lg:block ${role === 'director' ? 'text-gold-300' : 'text-slate-400 group-hover:text-brand-600'}`} />
               </button>
 
               {/* Manager */}
               <button
                 onClick={() => setRole('manager')}
                 title="Switch to Manager View"
-                className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-xl border transition-all duration-200 ${
+                className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-xl border transition-all duration-200 cursor-pointer ${
                   role === 'manager'
-                    ? 'bg-brand-600 border-brand-500 shadow-md shadow-brand-900/30 text-white'
-                    : 'bg-white border-slate-200 text-slate-600 hover:border-brand-400 hover:shadow-sm hover:text-slate-900'
+                    ? 'bg-brand-600 border-brand-500 shadow-md shadow-brand-900/30 text-white ring-1 ring-brand-400/40'
+                    : 'bg-white border-slate-200 text-slate-700 hover:border-brand-400 hover:shadow-xs hover:bg-slate-50/80'
                 }`}
               >
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-extrabold shrink-0 ${
-                  role === 'manager' ? 'bg-gold-400 text-slate-900' : 'bg-slate-100 text-slate-700 group-hover:bg-brand-50'
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-roboto font-extrabold shrink-0 shadow-2xs ${
+                  role === 'manager' ? 'bg-gold-400 text-slate-950' : 'bg-slate-100 text-slate-700 group-hover:bg-brand-50 group-hover:text-brand-700'
                 }`}>
                   RK
                 </div>
                 <div className="hidden lg:flex flex-col items-start leading-none">
-                  <span className="text-[11px] font-extrabold tracking-tight">Manager</span>
-                  <span className={`text-[9px] font-mono mt-0.5 ${role === 'manager' ? 'text-gold-300' : 'text-slate-400'}`}>Branch VP</span>
+                  <span className="text-[11px] font-inter font-extrabold tracking-tight">Manager</span>
+                  <span className={`text-[10px] font-roboto font-medium mt-0.5 ${role === 'manager' ? 'text-gold-300' : 'text-slate-500'}`}>Branch VP</span>
                 </div>
-                <Briefcase className={`w-3.5 h-3.5 hidden lg:block ${role === 'manager' ? 'text-gold-300' : 'text-slate-300 group-hover:text-brand-400'}`} />
+                <Briefcase className={`w-3.5 h-3.5 hidden lg:block ${role === 'manager' ? 'text-gold-300' : 'text-slate-400 group-hover:text-brand-600'}`} />
               </button>
 
               {/* Agent */}
               <button
                 onClick={() => setRole('agent')}
                 title="Switch to Agent View"
-                className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-xl border transition-all duration-200 ${
+                className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-xl border transition-all duration-200 cursor-pointer ${
                   role === 'agent'
-                    ? 'bg-brand-600 border-brand-500 shadow-md shadow-brand-900/30 text-white'
-                    : 'bg-white border-slate-200 text-slate-600 hover:border-brand-400 hover:shadow-sm hover:text-slate-900'
+                    ? 'bg-brand-600 border-brand-500 shadow-md shadow-brand-900/30 text-white ring-1 ring-brand-400/40'
+                    : 'bg-white border-slate-200 text-slate-700 hover:border-brand-400 hover:shadow-xs hover:bg-slate-50/80'
                 }`}
               >
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-extrabold shrink-0 ${
-                  role === 'agent' ? 'bg-gold-400 text-slate-900' : 'bg-slate-100 text-slate-700 group-hover:bg-brand-50'
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-roboto font-extrabold shrink-0 shadow-2xs ${
+                  role === 'agent' ? 'bg-gold-400 text-slate-950' : 'bg-slate-100 text-slate-700 group-hover:bg-brand-50 group-hover:text-brand-700'
                 }`}>
                   VM
                 </div>
                 <div className="hidden lg:flex flex-col items-start leading-none">
-                  <span className="text-[11px] font-extrabold tracking-tight">Agent</span>
-                  <span className={`text-[9px] font-mono mt-0.5 ${role === 'agent' ? 'text-gold-300' : 'text-slate-400'}`}>Sales Rep</span>
+                  <span className="text-[11px] font-inter font-extrabold tracking-tight">Agent</span>
+                  <span className={`text-[10px] font-roboto font-medium mt-0.5 ${role === 'agent' ? 'text-gold-300' : 'text-slate-500'}`}>Sales Rep</span>
                 </div>
-                <UserCheck className={`w-3.5 h-3.5 hidden lg:block ${role === 'agent' ? 'text-gold-300' : 'text-slate-300 group-hover:text-brand-400'}`} />
+                <UserCheck className={`w-3.5 h-3.5 hidden lg:block ${role === 'agent' ? 'text-gold-300' : 'text-slate-400 group-hover:text-brand-600'}`} />
               </button>
             </div>
 
