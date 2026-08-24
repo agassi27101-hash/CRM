@@ -22,7 +22,7 @@ export function CRMProvider({ children }) {
 
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     const saved = localStorage.getItem('crm_auth');
-    return saved !== null ? saved === 'true' : true;
+    return saved === 'true';
   });
 
   const [currentUser, setCurrentUser] = useState(() => {
@@ -128,6 +128,8 @@ export function CRMProvider({ children }) {
 
   const logout = () => {
     setIsAuthenticated(false);
+    localStorage.setItem('crm_auth', 'false');
+    localStorage.removeItem('crm_user');
     showToast('You have been securely signed out.', 'info');
   };
 
