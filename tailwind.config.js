@@ -42,6 +42,7 @@ export default {
         sans: ['Inter', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
         roboto: ['Roboto', 'sans-serif'],
+        'open-sans': ['"Open Sans"', 'sans-serif'],
         openSans: ['"Open Sans"', 'sans-serif'],
         mono: ['IBM Plex Mono', 'monospace'],
       },
