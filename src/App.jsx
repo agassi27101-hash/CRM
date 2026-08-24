@@ -43,14 +43,16 @@ function AppContent() {
   };
 
   return (
-    <Shell>
-      {renderTabContent()}
+    <>
+      <Shell>
+        {renderTabContent()}
+      </Shell>
       <LeadDrawer />
       <NewLeadModal />
       <NewPropertyModal />
       <ReportModal />
       <Toast />
-    </Shell>
+    </>
   );
 }
 

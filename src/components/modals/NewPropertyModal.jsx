@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCRM } from '../../context/CRMContext';
 import { LOCALITIES, PEOPLE } from '../../data/mockData';
 import { X, Building } from 'lucide-react';
 
 export default function NewPropertyModal() {
   const { propertyModalOpen, setPropertyModalOpen, addProperty } = useCRM();
+
+  useEffect(() => {
+    if (propertyModalOpen) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [propertyModalOpen]);
 
   const [title, setTitle] = useState('');
   const [loc, setLoc] = useState(LOCALITIES[0]);
@@ -40,13 +49,13 @@ export default function NewPropertyModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 animate-fade-in">
       <div
         onClick={() => setPropertyModalOpen(false)}
         className="fixed inset-0 bg-slate-950/40 backdrop-blur-xs transition-opacity"
       />
 
-      <div className="relative bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-md w-full p-6 z-10">
+      <div className="relative bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-md w-full max-h-[85vh] flex flex-col p-6 z-10 overflow-y-auto my-auto">
         <div className="flex items-center justify-between pb-4 border-b border-slate-100">
           <div className="flex items-center gap-2">
             <div className="p-2 bg-brand-50 text-brand-700 rounded-lg">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCRM } from '../../context/CRMContext';
 import { LOCALITIES, PEOPLE } from '../../data/mockData';
 import { X, UserPlus, ChevronDown } from 'lucide-react';
@@ -10,6 +10,15 @@ const SOURCES = ['Direct Walk-in', 'Facebook Campaign', 'Google Ads', 'IRIS Chan
 
 export default function NewLeadModal() {
   const { leadModalOpen, setLeadModalOpen, addLead, role, properties } = useCRM();
+
+  useEffect(() => {
+    if (leadModalOpen) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [leadModalOpen]);
 
   const [activeTab, setActiveTab] = useState(0);
 
@@ -70,12 +79,12 @@ export default function NewLeadModal() {
   const labelCls = 'block text-[10px] font-mono font-extrabold text-slate-500 uppercase tracking-wider mb-1';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 animate-fade-in">
       <div onClick={() => setLeadModalOpen(false)} className="fixed inset-0 bg-slate-950/50 backdrop-blur-sm" />
 
-      <div className="relative bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-lg z-10 overflow-hidden">
+      <div className="relative bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-lg max-h-[85vh] flex flex-col z-10 overflow-hidden my-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-brand-950">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-brand-950 shrink-0">
           <div className="flex items-center gap-2">
             <div className="p-1.5 bg-brand-800/80 text-gold-400 rounded-lg">
               <UserPlus className="w-4 h-4" />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCRM } from '../../context/CRMContext';
 import {
   X, BarChart3, TrendingUp, Download, Calendar,
@@ -11,6 +11,15 @@ export default function ReportModal() {
     approvals, tasks, formatCurrency, PEOPLE, STAGES
   } = useCRM();
   const [dateRange, setDateRange] = useState('30d');
+
+  useEffect(() => {
+    if (activeReport) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [activeReport]);
 
   if (!activeReport) return null;
   const { id, label, category } = activeReport;
@@ -761,10 +770,10 @@ export default function ReportModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 animate-fade-in">
       <div onClick={() => setActiveReport(null)} className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm" />
-      <div className="relative bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden z-10">
-        <div className="px-6 py-4 bg-brand-950 text-white flex items-center justify-between border-b border-brand-900">
+      <div className="relative bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-4xl max-h-[85vh] flex flex-col overflow-hidden z-10 my-auto">
+        <div className="px-6 py-4 bg-brand-950 text-white flex items-center justify-between border-b border-brand-900 shrink-0">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-gold-500/20 text-gold-400 rounded-xl border border-gold-500/30">
               {catIcon[category] || <BarChart3 className="w-5 h-5" />}
