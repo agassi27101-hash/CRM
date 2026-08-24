@@ -39,7 +39,10 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        openSans: ['"Open Sans"', 'sans-serif'],
         mono: ['IBM Plex Mono', 'monospace'],
       },
       boxShadow: {

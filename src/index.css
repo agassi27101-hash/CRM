@@ -4,7 +4,20 @@
 
 @layer base {
   body {
-    @apply bg-[#F4F7F5] text-slate-800 font-sans;
+    @apply bg-[#F4F7F5] text-slate-800 font-inter;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-inter tracking-tight;
+  }
+
+  table, .data-table {
+    @apply font-openSans;
+  }
+
+  input, select, textarea, button, .metric-value {
+    @apply font-roboto;
   }
 }
 
