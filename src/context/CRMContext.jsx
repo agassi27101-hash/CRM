@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   ROLES,
   PEOPLE,
+  DEMO_USERS,
   STAGES,
   LOCALITIES,
   INITIAL_PROPERTIES,
@@ -17,6 +18,20 @@ const CRMContext = createContext();
 export function CRMProvider({ children }) {
   const [role, setRoleState] = useState(() => {
     return localStorage.getItem('crm_role') || 'director';
+  });
+
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const saved = localStorage.getItem('crm_auth');
+    return saved !== null ? saved === 'true' : true;
+  });
+
+  const [currentUser, setCurrentUser] = useState(() => {
+    const saved = localStorage.getItem('crm_user');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) {}
+    }
+    const defaultRole = localStorage.getItem('crm_role') || 'director';
+    return DEMO_USERS.find((u) => u.role === defaultRole) || DEMO_USERS[0];
   });
 
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -62,6 +77,61 @@ export function CRMProvider({ children }) {
   }, [role]);
 
   useEffect(() => {
+    localStorage.setItem('crm_auth', isAuthenticated ? 'true' : 'false');
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    localStorage.setItem('crm_user', JSON.stringify(currentUser));
+  }, [currentUser]);
+
+  const setRole = (newRole) => {
+    setRoleState(newRole);
+    const userMatch = DEMO_USERS.find((u) => u.role === newRole);
+    if (userMatch) {
+      setCurrentUser(userMatch);
+    }
+    const roleName = ROLES[newRole.toUpperCase()]?.name || newRole;
+    showToast(`Switched view to ${roleName}`, 'success');
+  };
+
+  const login = (email, password) => {
+    const user = DEMO_USERS.find((u) => u.email.toLowerCase() === email.toLowerCase());
+    if (user && (user.password === password || password === 'password123' || password === 'demo123')) {
+      setCurrentUser(user);
+      setRoleState(user.role);
+      setIsAuthenticated(true);
+      showToast(`Welcome back, ${user.name}! (${user.title})`, 'success');
+      return { success: true, user };
+    }
+    // Generic fallback for any email entered
+    if (email && password) {
+      const fallbackUser = {
+        id: `usr_${Date.now()}`,
+        email,
+        name: email.split('@')[0].replace('.', ' ').toUpperCase(),
+        role: 'agent',
+        title: 'Sales Consultant',
+        branch: 'Chennai Headquarters',
+        avatar: email.substring(0, 2).toUpperCase(),
+        phone: '+91 98400 00000',
+        badge: 'Enterprise User'
+      };
+      setCurrentUser(fallbackUser);
+      setRoleState('agent');
+      setIsAuthenticated(true);
+      showToast(`Signed in successfully as ${fallbackUser.name}`, 'success');
+      return { success: true, user: fallbackUser };
+    }
+    showToast('Invalid credentials. Please enter valid email & password.', 'error');
+    return { success: false, error: 'Invalid credentials' };
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    showToast('You have been securely signed out.', 'info');
+  };
+
+  useEffect(() => {
     localStorage.setItem('crm_leads', JSON.stringify(leads));
   }, [leads]);
 
@@ -88,12 +158,6 @@ export function CRMProvider({ children }) {
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
     }, 4000);
-  };
-
-  const setRole = (newRole) => {
-    setRoleState(newRole);
-    const roleName = ROLES[newRole.toUpperCase()]?.name || newRole;
-    showToast(`Switched view to ${roleName}`, 'success');
   };
 
   // Currency Formatter Utility (₹ Cr / ₹ Lakhs)
@@ -371,6 +435,11 @@ export function CRMProvider({ children }) {
   return (
     <CRMContext.Provider
       value={{
+        isAuthenticated,
+        currentUser,
+        login,
+        logout,
+        DEMO_USERS,
         role,
         setRole,
         activeTab,

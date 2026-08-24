@@ -30,13 +30,16 @@ import {
   Mail,
   UserX,
   FileSpreadsheet,
-  PieChart
+  PieChart,
+  LogOut
 } from 'lucide-react';
 
 export default function Shell({ children }) {
   const {
     role,
     setRole,
+    currentUser,
+    logout,
     activeTab,
     setActiveTab,
     activeSmartList,
@@ -1030,11 +1033,31 @@ export default function Shell({ children }) {
             {/* Quick Action Button */}
             <button
               onClick={() => setLeadModalOpen(true)}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-brand-600 text-white rounded-xl text-xs font-bold hover:bg-brand-700 transition-all shadow-md shadow-brand-900/20 shrink-0"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-brand-600 text-white rounded-xl text-xs font-bold hover:bg-brand-700 transition-all shadow-md shadow-brand-900/20 shrink-0 cursor-pointer"
             >
               <Plus className="w-4 h-4 text-gold-400" />
               <span className="hidden sm:inline">Add Lead</span>
             </button>
+
+            {/* User Profile & Sign Out Button */}
+            <div className="flex items-center gap-2 pl-2 border-l border-slate-200 shrink-0">
+              <div className="hidden xl:flex flex-col items-end leading-none text-right">
+                <span className="text-xs font-extrabold text-slate-800 tracking-tight">
+                  {currentUser?.name || currentRoleInfo.name}
+                </span>
+                <span className="text-[9px] font-mono text-slate-400 mt-0.5">
+                  {currentUser?.branch || 'HQ'}
+                </span>
+              </div>
+              <button
+                onClick={logout}
+                title="Sign Out / Switch Workstation"
+                className="p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-rose-50 hover:border-rose-300 text-slate-500 hover:text-rose-600 transition-all duration-200 shadow-2xs group flex items-center gap-1.5 text-xs font-bold cursor-pointer"
+              >
+                <LogOut className="w-4 h-4 text-slate-400 group-hover:text-rose-600 transition-colors" />
+                <span className="hidden md:inline text-[11px]">Sign Out</span>
+              </button>
+            </div>
           </div>
         </header>
 

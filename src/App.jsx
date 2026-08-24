@@ -16,9 +16,19 @@ import Toast from './components/common/Toast';
 
 import ApprovalsView from './components/approvals/ApprovalsView';
 import BoardPipelineView from './components/director/BoardPipelineView';
+import LoginPage from './components/auth/LoginPage';
 
 function AppContent() {
-  const { activeTab, role } = useCRM();
+  const { activeTab, role, isAuthenticated } = useCRM();
+
+  if (!isAuthenticated) {
+    return (
+      <>
+        <LoginPage />
+        <Toast />
+      </>
+    );
+  }
 
   const renderTabContent = () => {
     switch (activeTab) {

@@ -25,6 +25,45 @@ export const ROLES = {
   }
 };
 
+export const DEMO_USERS = [
+  {
+    id: 'usr_director',
+    email: 'board@meridianestates.com',
+    password: 'password123',
+    name: 'Executive Board',
+    role: 'director',
+    title: 'Group Managing Director',
+    branch: 'Chennai Corporate HQ',
+    avatar: 'BD',
+    phone: '+91 44 2800 1000',
+    badge: 'C-Suite Executive'
+  },
+  {
+    id: 'usr_manager',
+    email: 'rajiv.kapoor@meridianestates.com',
+    password: 'password123',
+    name: 'Rajiv Kapoor',
+    role: 'manager',
+    title: 'VP Sales & Operations',
+    branch: 'Adyar Regional Hub',
+    avatar: 'RK',
+    phone: '+91 98400 12345',
+    badge: 'Branch Leadership'
+  },
+  {
+    id: 'usr_agent',
+    email: 'vikram.mehta@meridianestates.com',
+    password: 'password123',
+    name: 'Vikram Mehta',
+    role: 'agent',
+    title: 'Senior Luxury Advisor',
+    branch: 'Besant Nagar Office',
+    avatar: 'VM',
+    phone: '+91 98400 98765',
+    badge: 'Prime Residential'
+  }
+];
+
 export const PEOPLE = {
   RK: { name: 'Rajiv Kapoor', role: 'VP Sales & Branch Mgr', branch: 'Adyar HQ', booked: 38500000, target: 45000000 },
   VM: { name: 'Vikram Mehta', role: 'Senior Luxury Advisor', branch: 'Besant Nagar', booked: 19800000, target: 22000000 },
